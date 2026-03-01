@@ -1,0 +1,84 @@
+@startuml
+class CoffeeShop {
+  - shopName: String
+  - location: String
+  + addBarista(barista: Barista): void
+  + addOrder(order: Order): void
+  + getOrdersByDate(date: Date): List<Order>
+}
+
+class Barista {
+  - baristaName: String
+  - baristaId: String
+  + prepareOrder(order: Order): void
+}
+
+class Order {
+  - orderId: String
+  - orderTimestamp: DateTime
+  - totalPrice: float
+  + calculateTotalPrice(): float
+  + assignBarista(barista: Barista): void
+}
+
+class Customer {
+  - customerName: String
+  - customerId: String
+  + placeOrder(order: Order): void
+  + redeemLoyaltyPoints(points: int): void
+}
+
+class LoyaltyAccount {
+  - loyaltyPoints: int
+  - membershipType: MembershipType
+  + addPoints(amount: float): void
+  + redeem(points: int): void
+  + getPoints(): int
+}
+
+class Beverage {
+  - beverageType: BeverageType
+  - beverageSize: BeverageSize
+  - basePrice: float
+  + getPrice(): float
+}
+
+class Extra {
+  - extraType: ExtraType
+  - extraPrice: float
+  + getPrice(): float
+}
+
+enum MembershipType {
+  REGULAR
+  GOLD
+}
+
+enum BeverageType {
+  ESPRESSO
+  LATTE
+  CAPPUCCINO
+}
+
+enum BeverageSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum ExtraType {
+  EXTRA_SHOT
+  VANILLA_SYRUP
+  CARAMEL_SYRUP
+  WHIPPED_CREAM
+}
+
+CoffeeShop "1" -- "0..*" Barista : baristas
+CoffeeShop "1" -- "0..*" Order : orders
+Order "1" -- "1" Customer : customer
+Order "1" -- "1" Barista : barista
+Order "1" -- "1" Beverage : beverage
+Order "1" -- "0..*" Extra : extras
+Customer "1" -- "1" LoyaltyAccount : loyaltyAccount
+Customer "1" -- "0..*" Order : orders
+@enduml

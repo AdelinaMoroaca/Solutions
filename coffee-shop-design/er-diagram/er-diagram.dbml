@@ -1,0 +1,57 @@
+Table CoffeeShop {
+  id int [pk, increment]
+  name varchar
+  location varchar
+}
+
+Table Barista {
+  id int [pk, increment]
+  name varchar
+  coffee_shop_id int [ref: > CoffeeShop.id]
+}
+
+Table Customer {
+  id int [pk, increment]
+  name varchar
+}
+
+Table LoyaltyAccount {
+  id int [pk, increment]
+  customer_id int [ref: > Customer.id]
+  points int
+  membership_type varchar
+}
+
+Table Order {
+  id int [pk, increment]
+  customer_id int [ref: > Customer.id]
+  barista_id int [ref: > Barista.id]
+  coffee_shop_id int [ref: > CoffeeShop.id]
+  order_timestamp datetime
+  total_price decimal
+}
+
+Table Beverage {
+  id int [pk, increment]
+  type varchar
+  size varchar
+  base_price decimal
+}
+
+Table OrderBeverage {
+  id int [pk, increment]
+  order_id int [ref: > Order.id]
+  beverage_id int [ref: > Beverage.id]
+}
+
+Table Extra {
+  id int [pk, increment]
+  name varchar
+  price decimal
+}
+
+Table OrderExtra {
+  id int [pk, increment]
+  order_id int [ref: > Order.id]
+  extra_id int [ref: > Extra.id]
+}
