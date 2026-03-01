@@ -54,4 +54,4 @@ The company has a simple discount policy: if the total value of an order exceeds
 
 ---
 
-If you have any questions or need further explanations, please refer to the code comments or contact the repository maintainer.
+If you have any questions or need further explanations, please refer to the code comments or contact Adelina Moroaca, the repository maintainer.
